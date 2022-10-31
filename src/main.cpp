@@ -3,7 +3,6 @@
 #include <math.h>
 #include "Matrix.h"
 #include "Renderer.h"
-// #include "geometry.h"
 
 using namespace std;
 
@@ -56,7 +55,7 @@ void testRenderer() {
     cout << "camera.projection: " << endl;
     cout << renderer.camera.projection();
 
-    mat4 model = renderer.donut.rotateZ(0);
+    mat4 model = mdl::rotateZ(0);
     renderer.setModelMat(model);
     renderer.draw();
 }
