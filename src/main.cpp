@@ -58,12 +58,17 @@ void testRenderer() {
     cout << renderer.camera.view();
     cout << "camera.projection: " << endl;
     cout << renderer.camera.projection();
+
+    mat4 model = renderer.donut.rotateX(90);
+    renderer.setModelMat(model);
     renderer.draw();
 }
 
 int main() {
     // testMatrix();
     testRenderer();
+
+    system("pause");
 
     return 0;
 }

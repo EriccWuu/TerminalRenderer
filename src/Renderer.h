@@ -13,19 +13,23 @@ struct RenderObj {
     std::vector<vec4> vertexs;
 
     void init() {
-        std::vector<vec4> circle1;
+        // donut
+        // std::vector<vec4> circle1;
         // for (float i = 0; i < 2*PI; i += 0.07)
         //     for (float j = 0; j < 2*PI; j += 0.02) circle1.push_back(vec4(2+r1*cos(i), 0, r1*sin(j), 1));
 
-        // for (float i = 0; i < 2*PI; i += 0.04) 
+        // for (float i = 0; i < 2*PI; i += 0.02)
         //     for (int j = 0; j < circle1.size(); j++) vertexs.push_back(rotateZ(i)*circle1[j]);
 
-        for (float i = 0; i < 2*PI; i += 0.07)
-            circle1.push_back(vec4(2+r1*cos(i), 0, r1*sin(i), 1));
+        // circle
+        std::vector<vec4> circle;
+        for (float i = 0; i < 2*PI; i += 0.007)
+            circle.push_back(vec4(3*cos(i), 3*sin(i), 0, 1));
+        for (vec4 v : circle)
+            vertexs.push_back(v);
 
-        for (float i = 0; i < 2*PI; i += 0.02)
-            for (int j = 0; j < circle1.size(); j++) vertexs.push_back(rotateZ(i)*circle1[j]);
-    }
+
+            }
 
     mat4 rotateX(double degree) {
         mat4 R;
@@ -86,15 +90,15 @@ public:
     Renderer() {
         donut.init();
         Model = mat4::identity();
+        for (int i = 0; i < canvas.width * canvas.height; i++) {
+            frameBuf.push_back(0);
+            depthBuf.push_back(100);
+        }
     }
 
     std::vector<vec4> getVertexs() {
         std::vector<vec4> v = donut.vertexs;
         return v;
-    }
-
-    void depthTest() {
-
     }
 
     mat4 rotateX(double degree) {
@@ -153,23 +157,43 @@ public:
 
             // projection division, transform to NDC
             v = v / v.w;
-            
+
             // NDC to screen
             v.x = 0.5 * width  * (v.x + 1.0);
             v.y = 0.5 * height * (v.y + 1.0);
             v.z = v.z * f1 + f2;
+
+            //
+            int x = floor(v.x);
+            int y = floor(v.y);
+            // std::cout << x << " " << y << " " << v.z << std::endl;
+
+            int ind = getIndex(x, y);
+            if (v.z < depthBuf[ind]) {
+                frameBuf[ind] = 1;
+                depthBuf[ind] = v.z;
+            }
         }
 
-        std::cout << "number of vertexs: " << vert.size() << std::endl;
-        std::cout << "MVP: "<< std::endl << MVP;
-        for (vec4 v : vert) std::cout << v << std::endl;
+        canvas.setBuf(frameBuf);
+        canvas.draw();
+
+        // std::cout << "number of vertexs: " << vert.size() << std::endl;
+        // std::cout << "MVP: "<< std::endl << MVP;
+        // for (vec4 v : vert) std::cout << v << std::endl;
+        // for (int i = 0; i < frameBuf.size(); i++) std::cout << frameBuf[i] << " " << depthBuf[i] << std::endl;
+    }
+
+    int getIndex(int x, int y) {
+        return (canvas.height - 1 - y) * canvas.width + x;
     }
 
 public:
     Canvas canvas;
     Camera camera;
     RenderObj donut;
-    std::vector<vec4> zbuffer;
+    std::vector<float> depthBuf;
+    std::vector<int>   frameBuf;
 
     mat4 Model, View, Proj;
 };
