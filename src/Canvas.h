@@ -12,7 +12,7 @@ public:
 
     void init() {
         height = 50;
-        width = 50;
+        width  = 50;
     }
     void setBuf(std::vector<int> buf) { buffer = buf; }
     void draw() {

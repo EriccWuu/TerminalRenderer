@@ -23,13 +23,14 @@ struct RenderObj {
 
         // circle
         std::vector<vec4> circle;
+        float r = 1;
         for (float i = 0; i < 2*PI; i += 0.007)
-            circle.push_back(vec4(3*cos(i), 3*sin(i), 0, 1));
+            circle.push_back(vec4(r*cos(i), r*sin(i), 0, 1));
         for (vec4 v : circle)
             vertexs.push_back(v);
-
-
-            }
+        // for (float i = 0; i < 2*PI; i += 0.002)
+        //     for (int j = 0; j < circle.size(); j++) vertexs.push_back(rotateY(i)*circle[j]);
+    }
 
     mat4 rotateX(double degree) {
         mat4 R;

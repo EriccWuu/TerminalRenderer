@@ -48,9 +48,6 @@ void testMatrix() {
 void testRenderer() {
     Renderer renderer;
 
-    // std::vector<vec4> v = renderer.donut.vertexs;
-    // cout << "number of vertexs: " <<  v.size() << endl;
-    // for (int i = 0; i < v.size(); i++) cout << v[i] << endl;
     cout << "camera.camDir:   " << renderer.camera.camDir << endl;
     cout << "camera.camUp:    " << renderer.camera.camUp << endl;
     cout << "camera.camRight: " << renderer.camera.camRight << endl;
@@ -59,7 +56,7 @@ void testRenderer() {
     cout << "camera.projection: " << endl;
     cout << renderer.camera.projection();
 
-    mat4 model = renderer.donut.rotateX(90);
+    mat4 model = renderer.donut.rotateZ(0);
     renderer.setModelMat(model);
     renderer.draw();
 }
