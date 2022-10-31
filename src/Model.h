@@ -13,22 +13,22 @@ namespace mdl {
 
         void init() {
             // donut
-            // std::vector<vec4> circle1;
-            // for (float i = 0; i < 2*PI; i += 0.07)
-            //     for (float j = 0; j < 2*PI; j += 0.02) circle1.push_back(vec4(2+r1*cos(i), 0, r1*sin(j), 1));
+            std::vector<vec4> circle1;
+            for (float i = 0; i < 2*PI; i += 0.07)
+                for (float j = 0; j < 2*PI; j += 0.02) circle1.push_back(vec4(2+r1*cos(i), 0, r1*sin(j), 1));
 
-            // for (float i = 0; i < 2*PI; i += 0.02)
-            //     for (int j = 0; j < circle1.size(); j++) vertexs.push_back(rotateZ(i)*circle1[j]);
+            for (float i = 0; i < 2*PI; i += 0.02)
+                for (int j = 0; j < circle1.size(); j++) vertexs.push_back(rotateZ(i)*circle1[j]);
 
             // circle
-            std::vector<vec4> circle;
-            float r = 1;
-            for (float i = 0; i < 2*PI; i += 0.007)
-                circle.push_back(vec4(r*cos(i), r*sin(i), 0, 1));
-            for (vec4 v : circle)
-                vertexs.push_back(v);
-            // for (float i = 0; i < 2*PI; i += 0.002)
-            //     for (int j = 0; j < circle.size(); j++) vertexs.push_back(rotateY(i)*circle[j]);
+            // std::vector<vec4> circle;
+            // float r = 2;
+            // for (float i = 0; i < 2*PI; i += 0.007)
+            //     circle.push_back(vec4(r*cos(i), r*sin(i), 0, 1));
+            // for (vec4 v : circle)
+            //     vertexs.push_back(v);
+            // // for (float i = 0; i < 2*PI; i += 0.002)
+            // //     for (int j = 0; j < circle.size(); j++) vertexs.push_back(rotateY(i)*circle[j]);
         }
 
         mat4 rotateX(double degree);

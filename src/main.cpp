@@ -55,7 +55,7 @@ void testr() {
     cout << "camera.projection: " << endl;
     cout << r.camera.projection();
 
-    mat4 model = r.rotateZ(0);
+    mat4 model = r.rotateY(0);
     r.setModelMat(model);
     r.draw();
 }

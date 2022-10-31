@@ -97,6 +97,8 @@ public:
             }
         }
 
+        // for (int &i : frameBuf) i = 1;
+
         canvas.setBuf(frameBuf);
         canvas.draw();
 
@@ -117,5 +119,5 @@ public:
     std::vector<float> depthBuf;
     std::vector<int>   frameBuf;
 
-    mat4 Model, View, Proj;
+    mat4 Model;
 };
