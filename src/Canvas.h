@@ -14,7 +14,7 @@ public:
         height = 50;
         width  = 50;
     }
-    void setBuf(std::vector<int> buf) { buffer = buf; }
+    void setBuf(std::vector<int> &buf) { buffer = buf; }
     void draw() {
         system("cls");
         for (int i = 0; i < height; i++) {

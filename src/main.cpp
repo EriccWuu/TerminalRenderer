@@ -1,10 +1,27 @@
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
+#include <windows.h>
 #include "Matrix.h"
 #include "Renderer.h"
 
 using namespace std;
+
+void gotoxy(int x, int y)
+{
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD pos;
+    pos.X = x;
+    pos.Y = y;
+    SetConsoleCursorPosition(handle, pos);
+}
+
+//隐藏光标函数
+void HideCursor()
+{
+    CONSOLE_CURSOR_INFO cursor_info = {1,0};//第二个值为0表示隐藏光标
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
+}
 
 void testMatrix() {
     vec3 a(1, 2, 1);
@@ -47,27 +64,34 @@ void testMatrix() {
 void testRenderer() {
     Renderer r;
 
-//     cout << "camera.camDir:   " << r.camera.camDir << endl;
-//     cout << "camera.camUp:    " << r.camera.camUp << endl;
-//     cout << "camera.camRight: " << r.camera.camRight << endl;
-//     cout << "camera.view: " << endl;
-//     cout << r.camera.view();
-//     cout << "camera.projection: " << endl;
-//     cout << r.camera.projection();
+    cout << "camera.camDir:   " << r.camera.camDir << endl;
+    cout << "camera.camUp:    " << r.camera.camUp << endl;
+    cout << "camera.camRight: " << r.camera.camRight << endl;
+    cout << "camera.view: " << endl;
+    cout << r.camera.view();
+    cout << "camera.projection: " << endl;
+    cout << r.camera.projection();
+    
 
-    // for (float i = 0; i < 2*PI; i += 0.02)
-    //     for (int j = 0; j < circle.size(); j++) vertexs.push_back(rotateZ(i)*circle[j]);
-
-    // mat4 model = r.rotateX(90);
-    // r.setModelMat(model);
+    mat4 model = r.rotateY(120);
+    r.setModelMat(model);
     r.draw();
 }
 
 int main() {
-    // testMatrix();
-    testRenderer();
 
-    system("pause");
+    Renderer r;
+
+    system("mode con: cols=100 lines=50");
+    HideCursor();
+    for (;;) {
+        for (float i = 0; i < 360; i += 20) {
+            gotoxy(0, 0);
+            mat4 model = r.rotateZ(i)*r.rotateX(i);
+            r.setModelMat(model);
+            r.draw();
+        }
+    }
 
     return 0;
 }

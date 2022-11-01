@@ -11,7 +11,7 @@ class Renderer {
 public:
     Renderer() {
         donut.init();
-        Model = mat4::identity();
+        ModelMat = mat4::identity();
         for (int i = 0; i < canvas.width * canvas.height; i++) {
             frameBuf.push_back(0);
             depthBuf.push_back(100);
@@ -25,31 +25,31 @@ public:
 
     mat4 rotateX(double degree) {
         mat4 model;
-        return model = mdl::rotateX(degree);
+        return model = Model::rotateX(degree);
     }
 
     mat4 rotateY(double degree) {
         mat4 model;
-        return model = mdl::rotateY(degree);
+        return model = Model::rotateY(degree);
     }
 
     mat4 rotateZ(double degree) {
         mat4 model;
-        return model = mdl::rotateZ(degree);
+        return model = Model::rotateZ(degree);
     }
 
     mat4 transport(vec3 r) {
         mat4 model;
-        return model = mdl::transport(r);
+        return model = Model::transport(r);
     }
 
     mat4 scale(vec3 ratio) {
         mat4 model;
-        return model = mdl::scale(ratio);
+        return model = Model::scale(ratio);
     }
 
     void setModelMat(mat4 model) {
-        Model = model;
+        ModelMat = model;
     }
 
     mat4 viewMat() {
@@ -65,7 +65,7 @@ public:
     void draw() {
         std::vector<vec4> vert = donut.vertexs;
         // mat4 MVP = mat4::identity() * camera.projection() * camera.view();
-        mat4 MVP = projMat() * viewMat() * Model;
+        mat4 MVP = projMat() * viewMat() * ModelMat;
 
         int width  = canvas.width;
         int height = canvas.height;
@@ -110,12 +110,16 @@ public:
             // }
         }
 
-        // for (int &i : frameBuf) i = 1;
-
+        // draw object
         canvas.setBuf(frameBuf);
         canvas.draw();
 
-        std::cout << "number of vertexs: " << vert.size() << std::endl;
+        // clear buffers
+        for (int i = 0; i < frameBuf.size(); i++) {
+            frameBuf[i] = 0;
+            depthBuf[i] = 100;
+        }
+
     }
 
     int getIndex(int x, int y) {
@@ -125,9 +129,9 @@ public:
 public:
     Canvas canvas;
     Camera camera;
-    mdl::Model donut;
+    Model donut;
     std::vector<float> depthBuf;
     std::vector<int>   frameBuf;
 
-    mat4 Model;
+    mat4 ModelMat;
 };
