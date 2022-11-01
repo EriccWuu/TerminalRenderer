@@ -86,7 +86,7 @@ int main() {
     HideCursor();
     for (;;) {
         for (float i = 0; i < 360; i += 20) {
-            gotoxy(0, 0);
+            system("cls");
             mat4 model = r.rotateZ(i)*r.rotateX(i);
             r.setModelMat(model);
             r.draw();
