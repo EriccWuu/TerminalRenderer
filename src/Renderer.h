@@ -95,6 +95,19 @@ public:
                 frameBuf[ind] = 1;
                 depthBuf[ind] = v.z;
             }
+
+            // if (v.x >= -1 && v.x <= 1 && v.y >= -1 && v.y <= 1) {
+            //     //
+            //     int x = floor(v.x);
+            //     int y = floor(v.y);
+            //     // std::cout << x << " " << y << " " << v.z << std::endl;
+
+            //     int ind = getIndex(x, y);
+            //     if (v.z < depthBuf[ind]) {
+            //         frameBuf[ind] = 1;
+            //         depthBuf[ind] = v.z;
+            //     }
+            // }
         }
 
         // for (int &i : frameBuf) i = 1;
@@ -102,10 +115,7 @@ public:
         canvas.setBuf(frameBuf);
         canvas.draw();
 
-        // std::cout << "number of vertexs: " << vert.size() << std::endl;
-        // std::cout << "MVP: "<< std::endl << MVP;
-        // for (vec4 v : vert) std::cout << v << std::endl;
-        // for (int i = 0; i < frameBuf.size(); i++) std::cout << frameBuf[i] << " " << depthBuf[i] << std::endl;
+        std::cout << "number of vertexs: " << vert.size() << std::endl;
     }
 
     int getIndex(int x, int y) {

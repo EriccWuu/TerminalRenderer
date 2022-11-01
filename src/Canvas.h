@@ -20,7 +20,7 @@ public:
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (buffer[(height-1-i)*width+j] == 0) printf("  ");
-                else printf(" .");
+                else printf(" %c", pixel[0]);
             }
             printf("\n");
         }

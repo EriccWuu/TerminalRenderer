@@ -44,25 +44,28 @@ void testMatrix() {
     cout << "m0 * a: \n" << m0 * a;
 }
 
-void testr() {
+void testRenderer() {
     Renderer r;
 
-    cout << "camera.camDir:   " << r.camera.camDir << endl;
-    cout << "camera.camUp:    " << r.camera.camUp << endl;
-    cout << "camera.camRight: " << r.camera.camRight << endl;
-    cout << "camera.view: " << endl;
-    cout << r.camera.view();
-    cout << "camera.projection: " << endl;
-    cout << r.camera.projection();
+//     cout << "camera.camDir:   " << r.camera.camDir << endl;
+//     cout << "camera.camUp:    " << r.camera.camUp << endl;
+//     cout << "camera.camRight: " << r.camera.camRight << endl;
+//     cout << "camera.view: " << endl;
+//     cout << r.camera.view();
+//     cout << "camera.projection: " << endl;
+//     cout << r.camera.projection();
 
-    mat4 model = r.rotateY(0);
-    r.setModelMat(model);
+    // for (float i = 0; i < 2*PI; i += 0.02)
+    //     for (int j = 0; j < circle.size(); j++) vertexs.push_back(rotateZ(i)*circle[j]);
+
+    // mat4 model = r.rotateX(90);
+    // r.setModelMat(model);
     r.draw();
 }
 
 int main() {
     // testMatrix();
-    testr();
+    testRenderer();
 
     system("pause");
 
