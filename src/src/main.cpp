@@ -7,22 +7,6 @@
 
 using namespace std;
 
-void gotoxy(int x, int y)
-{
-    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD pos;
-    pos.X = x;
-    pos.Y = y;
-    SetConsoleCursorPosition(handle, pos);
-}
-
-//隐藏光标函数
-void HideCursor()
-{
-    CONSOLE_CURSOR_INFO cursor_info = {1,0};//第二个值为0表示隐藏光标
-    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
-}
-
 void testMatrix() {
     vec3 a(1, 2, 1);
     vec3 b = a;
@@ -71,19 +55,17 @@ void testRenderer() {
     cout << r.camera.view();
     cout << "camera.projection: " << endl;
     cout << r.camera.projection();
-    
 
     mat4 model = r.rotateY(120);
     r.setModelMat(model);
     r.draw();
 }
-
-int main() {
-
+void run() {
     Renderer r;
 
     system("mode con: cols=100 lines=50");
-    HideCursor();
+    CONSOLE_CURSOR_INFO cursor_info = {1,0};//第二个值为0表示隐藏光标
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
     for (;;) {
         for (float i = 0; i < 360; i += 20) {
             system("cls");
@@ -92,6 +74,11 @@ int main() {
             r.draw();
         }
     }
+}
+
+int main() {
+
+    testMatrix();
 
     return 0;
 }

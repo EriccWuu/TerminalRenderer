@@ -1,0 +1,7 @@
+[
+{
+  "directory": "E:/Doc/ProjectFiles/CPP/TerminalRenderer/src/build",
+  "command": "E:\\Program\\MSYS64\\clang64\\bin\\clang++.exe -g -o CMakeFiles\\TerminalRenderer.dir\\src\\main.cpp.obj -c E:\\Doc\\ProjectFiles\\CPP\\TerminalRenderer\\src\\src\\main.cpp",
+  "file": "E:\\Doc\\ProjectFiles\\CPP\\TerminalRenderer\\src\\src\\main.cpp"
+}
+]

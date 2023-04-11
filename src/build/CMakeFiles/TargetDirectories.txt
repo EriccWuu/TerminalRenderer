@@ -1,0 +1,3 @@
+E:/Doc/ProjectFiles/CPP/TerminalRenderer/src/build/CMakeFiles/TerminalRenderer.dir
+E:/Doc/ProjectFiles/CPP/TerminalRenderer/src/build/CMakeFiles/edit_cache.dir
+E:/Doc/ProjectFiles/CPP/TerminalRenderer/src/build/CMakeFiles/rebuild_cache.dir
